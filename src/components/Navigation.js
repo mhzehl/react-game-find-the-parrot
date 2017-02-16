@@ -8,6 +8,10 @@ import IconButton from 'material-ui/IconButton'
 import LocationSearching from 'material-ui/svg-icons/device/location-searching'
 import FlatButton from 'material-ui/FlatButton'
 
+const navBar = {
+  backgroundColor: '#00bcd4',
+}
+
 export class Navigation extends PureComponent {
   static propTypes = {
     signedIn: PropTypes.bool.isRequired,
@@ -30,6 +34,8 @@ export class Navigation extends PureComponent {
     const { signedIn } = this.props
     return (
       <AppBar
+        className='navBar'
+        style={{backgroundColor: '#00bcd4'}}
         title="Find the Parrot"
         iconElementLeft={<IconButton onClick={this.goHome}><LocationSearching /></IconButton>}
         iconElementRight={signedIn ?
