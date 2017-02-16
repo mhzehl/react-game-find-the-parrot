@@ -21,7 +21,7 @@ ReactDOM.render(
     <Router history={history}>
       <Route path="/" component={App}>
         <IndexRoute component={RecipesContainer} />
-        <Route path="/recipes/:recipeId" component={RecipePage} />
+        <Route path="/recipe/:recipeId" component={RecipePage} />
         <Route path="/sign-up" component={SignUp} />
         <Route path="/sign-in" component={SignIn} />
       </Route>

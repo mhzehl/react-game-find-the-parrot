@@ -1,8 +1,28 @@
 import React, { PureComponent, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
+import { history } from '../store'
+import Paper from 'material-ui/Paper';
+import TextField from 'material-ui/TextField'
+import RaisedButton from 'material-ui/RaisedButton'
+import FlatButton from 'material-ui/FlatButton'
 import signUp from '../actions/user/sign-up'
 import Title from '../components/Title'
+
+const dialogStyle = {
+  width: '400px',
+  margin: '50px auto',
+  padding: '2rem',
+}
+
+const buttonStyle = {
+  float: 'right',
+  marginLeft: '2rem',
+}
+
+const signInUp = {
+  marginTop: '1rem',
+}
 
 export class SignUp extends PureComponent {
   constructor() {
@@ -10,13 +30,17 @@ export class SignUp extends PureComponent {
     this.state = {}
   }
 
+  signIn() {
+    history.push('/sign-in')
+  }
+
   submitForm(event) {
     event.preventDefault()
     if (this.validateAll()) {
       const user = {
-        name: this.refs.name.value,
-        email: this.refs.email.value,
-        password: this.refs.password.value
+        name: this.refs.name.getValue(),
+        email: this.refs.email.getValue(),
+        password: this.refs.password.getValue()
       }
       this.props.signUp(user)
     }
@@ -32,7 +56,7 @@ export class SignUp extends PureComponent {
   validateName() {
     const { name } = this.refs
 
-    if (name.value.length > 1) {
+    if (name.getValue().length > 1) {
       this.setState({
         nameError: null
       })
@@ -48,14 +72,14 @@ export class SignUp extends PureComponent {
   validateEmail() {
     const { email } = this.refs
 
-    if (email.value.match(/^[a-z0-9.\_-]+@[a-z0-9.\_-]+\.[a-z0-9.\_-]+$/)) {
+    if (email.getValue().match(/^[a-z0-9.\_-]+@[a-z0-9.\_-]+\.[a-z0-9.\_-]+$/)) {
       this.setState({
         emailError: null
       })
       return true
     }
 
-    if (email.value === '') {
+    if (email.getValue() === '') {
       this.setState({
         emailError: 'Please provide your email address'
       })
@@ -71,14 +95,14 @@ export class SignUp extends PureComponent {
   validatePassword() {
     const { password, passwordConfirmation } = this.refs
 
-    if (password.value.length < 6) {
+    if (password.getValue().length < 6) {
       this.setState({
         passwordError: 'Password is too short'
       })
       return false
     }
 
-    if (password.value.match(/[a-zA-Z]+/) && password.value.match(/[0-9]+/)) {
+    if (password.getValue().match(/[a-zA-Z]+/) && password.getValue().match(/[0-9]+/)) {
       this.setState({
         passwordError: null
       })
@@ -94,7 +118,7 @@ export class SignUp extends PureComponent {
   validatePasswordConfirmation() {
     const { password, passwordConfirmation } = this.refs
 
-    if (password.value === passwordConfirmation.value) {
+    if (password.getValue() === passwordConfirmation.getValue()) {
       this.setState({
         passwordConfirmationError: null
       })
@@ -109,12 +133,14 @@ export class SignUp extends PureComponent {
 
   render() {
     return (
-      <div className="sign-up form">
+
+      <Paper style={ dialogStyle }>
         <Title content="Sign Up" />
 
         <form onSubmit={this.submitForm.bind(this)}>
           <div className="input">
-            <input ref="name" type="text" placeholder="Your name"
+
+            <TextField ref="name" type="text" hintText="Your name"
               onChange={this.validateName.bind(this)} />
             { this.state.nameError ?
               <p className="formError">{ this.state.nameError }</p> :
@@ -122,7 +148,7 @@ export class SignUp extends PureComponent {
             }
           </div>
           <div className="input">
-            <input ref="email" type="email" placeholder="Email address"
+            <TextField ref="email" type="email" hintText="Email address"
               onChange={this.validateEmail.bind(this)} />
             { this.state.emailError ?
               <p className="formError">{ this.state.emailError }</p> :
@@ -130,7 +156,7 @@ export class SignUp extends PureComponent {
             }
           </div>
           <div className="input">
-            <input ref="password" type="password" placeholder="Password"
+            <TextField ref="password" type="password" hintText="Password"
               onChange={this.validatePassword.bind(this)} />
             { this.state.passwordError ?
               <p className="formError">{ this.state.passwordError }</p> :
@@ -138,7 +164,7 @@ export class SignUp extends PureComponent {
             }
           </div>
           <div className="input">
-            <input ref="passwordConfirmation" type="password" placeholder="Repeat Password"
+            <TextField ref="passwordConfirmation" type="password" hintText="Repeat Password"
               onKeyUp={this.validatePasswordConfirmation.bind(this)}
               onChange={this.validatePasswordConfirmation.bind(this)} />
             { this.state.passwordConfirmationError ?
@@ -146,10 +172,12 @@ export class SignUp extends PureComponent {
               null
             }
           </div>
-          <Link to="/sign-in">Sign in</Link>
-          <input type="submit" value="Sign up" />
+          <div style={ signInUp }>
+            <FlatButton onClick={ this.signIn } label="Sign In" />
+            <RaisedButton style={ buttonStyle } onClick={ this.submitForm.bind(this) } label="Sign Up" primary={true} />
+          </div>
         </form>
-      </div>
+      </Paper>
     )
   }
 }
