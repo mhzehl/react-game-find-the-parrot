@@ -19,6 +19,10 @@ const buttonStyle = {
   marginLeft: '2rem',
 }
 
+const signInUp = {
+  marginTop: '1rem',
+}
+
 export class SignIn extends PureComponent {
   submitForm(event) {
     const user = {
@@ -45,14 +49,10 @@ export class SignIn extends PureComponent {
           <div className="input">
             <TextField ref="password" type="password" hintText="Password"  />
           </div>
-          <FlatButton
-            onClick={ this.signUp }
-            label="Sign up" />
-          <RaisedButton
-            style={ buttonStyle }
-            onClick={ this.submitForm.bind(this) }
-            label="Sign in"
-            primary={true} />
+          <div style={ signInUp }>
+            <FlatButton onClick={ this.signUp } label="Sign up" />
+            <RaisedButton style={ buttonStyle } onClick={ this.submitForm.bind(this) } label="Sign in" primary={true} />
+          </div>
         </form>
       </Paper>
     )
