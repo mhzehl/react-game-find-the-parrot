@@ -6,18 +6,19 @@ import subscribeToGamesService from '../actions/games/subscribe'
 import Title from '../components/Title'
 import GameItem from './GameItem'
 import './GamesContainer.sass'
+import PlayerAvatar from '../components/PlayerAvatar'
 
 export class GamesContainer extends PureComponent {
-  static propTypes = {
-    games: PropTypes.array.isRequired,
-    fetchGames: PropTypes.func.isRequired,
-    subscribeToGamesService: PropTypes.func.isRequired,
-  }
+  // static propTypes = {
+  //   games: PropTypes.array.isRequired,
+  //   fetchGames: PropTypes.func.isRequired,
+  //   subscribeToGamesService: PropTypes.func.isRequired,
+  // }
 
-  componentDidMount() {
-    this.props.fetchGames()
-    this.props.subscribeToGamesService()
-  }
+  // componentDidMount() {
+  //   this.props.fetchGames()
+  //   this.props.subscribeToGamesService()
+  // }
 
   renderGame(game, index) {
     return <GameItem key={ index } { ...game } liked={ false } />
@@ -28,6 +29,7 @@ export class GamesContainer extends PureComponent {
       <div className="games wrapper">
         <header>
           <Title content="All Games" />
+          <PlayerAvatar />
         </header>
 
         <main className="container">
