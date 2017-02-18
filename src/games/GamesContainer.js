@@ -6,7 +6,7 @@ import subscribeToGamesService from '../actions/games/subscribe'
 import Title from '../components/Title'
 import GameItem from './GameItem'
 import './GamesContainer.sass'
-import PlayerAvatar from '../components/PlayerAvatar'
+import GamePlayerBox from './GamePlayerBox'
 
 export class GamesContainer extends PureComponent {
   // static propTypes = {
@@ -29,7 +29,7 @@ export class GamesContainer extends PureComponent {
       <div className="games wrapper">
         <header>
           <Title content="All Games" />
-          <PlayerAvatar />
+          <GamePlayerBox />
         </header>
 
         <main className="container">

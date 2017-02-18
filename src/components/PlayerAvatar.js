@@ -21,6 +21,7 @@ export default class PlayerAvatar extends PureComponent {
       <Avatar
         color={deepOrange300}
         backgroundColor={purple500}
+        size={60}
         style={style}
       >
         RN
