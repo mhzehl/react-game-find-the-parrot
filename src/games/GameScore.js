@@ -2,6 +2,8 @@ import React, { PureComponent } from 'react'
 import Paper from 'material-ui/Paper';
 import './GameScore.sass'
 
+// Todo hook up score
+
 const style = {
   height:60,
   width: 60,
