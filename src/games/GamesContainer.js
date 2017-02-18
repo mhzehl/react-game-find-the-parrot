@@ -21,22 +21,20 @@ export class GamesContainer extends PureComponent {
   }
 
   renderGame(game, index) {
-    return <GameItem key={ index } { ...game } liked={ false } />
+    return <GameItem key={ index } { ...game } />
   }
 
   render() {
     return(
       <div className="app wrapper">
-        <div className="create">
-          <CreateGame />
-        </div>
         <div className="games wrapper">
-          <header>
             <Title content="All Games" />
-          </header>
           <main className="container">
             { this.props.games.map(this.renderGame.bind(this)) }
           </main>
+        </div>
+        <div className="newGame wrapper">
+          <CreateGame />
         </div>
       </div>
     )

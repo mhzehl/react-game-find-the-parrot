@@ -10,7 +10,7 @@ class CreateGame extends PureComponent {
   render() {
     return(
       <div>
-        <h3>Start a New Game</h3>
+        <h1>Start a New Game</h1>
         <RaisedButton type="submit" label="Start Game" />
       </div>
     )
