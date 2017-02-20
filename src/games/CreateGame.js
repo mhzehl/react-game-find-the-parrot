@@ -1,20 +1,70 @@
 import React, { PureComponent } from 'react'
+import Title from '../components/Title'
 import createGame from '../actions/games/create'
 import { connect } from 'react-redux'
-import { link } from 'react-router'
-import RaisedButton from 'material-ui/RaisedButton'
+import Editor from 'react-medium-editor'
+import 'medium-editor/src/sass/medium-editor.scss';
+import toMarkdown from 'to-markdown'
 
 import './CreateGame.sass'
 
 class CreateGame extends PureComponent {
-  render() {
-    return(
+  constructor(props) {
+    super()
+
+    const { title, host } = props
+
+    this.state = {
+      title,
+      host
+    }
+  }
+
+  updateTitle(event) {
+  this.setState({
+    title: this.refs.title.value
+  })
+}
+
+saveGame() {
+  const {
+    title,
+    host,
+  } = this.state
+
+  const game = {
+    title,
+    host,
+  }
+
+  this.props.createGame(game)
+}
+
+render() {
+    return (
       <div>
-        <h1>Start a New Game</h1>
-        <RaisedButton type="submit" label="Start Game" />
+        <Title content="New Game" />
+        <div className="editor">
+          <input
+            type="text"
+            ref="title"
+            className="title"
+            placeholder="Title"
+            defaultValue={this.state.title}
+            onChange={this.updateTitle.bind(this)}
+            onKeyDown={this.updateTitle.bind(this)} />
+
+          <div className="actions">
+            <button className="primary" onClick={this.saveGame.bind(this)}>Start Now!</button>
+          </div>
+        </div>
       </div>
     )
   }
 }
 
-export default connect(null, { createGame })(CreateGame)
+const mapStateToProps = ( state ) => {
+  return { host: state.currentUser }
+}
+
+export default connect(mapStateToProps, { createGame })(CreateGame)

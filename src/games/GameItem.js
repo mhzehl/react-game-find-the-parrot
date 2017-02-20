@@ -5,8 +5,20 @@ import { Link } from 'react-router'
 import './GameItem.sass'
 
 export class GameItem extends PureComponent {
+  constructor(props) {
+    super()
+
+    const { _id, title } = props
+
+    this.state = {
+      _id,
+      title,
+    }
+  }
 
   render() {
+    const { _id, title } = this.props
+
     return(
       <article className="game">
         <header>
@@ -22,4 +34,10 @@ export class GameItem extends PureComponent {
   }
 }
 
-export default connect(GameItem);
+const mapStateToProps = ({ currentUser }) => {
+  return {
+    currentUser,
+  }
+}
+
+export default connect(mapStateToProps)(GameItem);

@@ -10,16 +10,16 @@ import './GamesContainer.sass'
 import GamePlayerBox from './GamePlayerBox'
 
 export class GamesContainer extends PureComponent {
-  // static propTypes = {
-  //   games: PropTypes.array.isRequired,
-  //   fetchGames: PropTypes.func.isRequired,
-  //   subscribeToGamesService: PropTypes.func.isRequired,
-  // }
+  static propTypes = {
+    games: PropTypes.array.isRequired,
+    fetchGames: PropTypes.func.isRequired,
+    subscribeToGamesService: PropTypes.func.isRequired,
+  }
 
-  // componentDidMount() {
-  //   this.props.fetchGames()
-  //   this.props.subscribeToGamesService()
-  // }
+  componentDidMount() {
+    this.props.fetchGames()
+    this.props.subscribeToGamesService()
+  }
 
   renderGame(game, index) {
     return <GameItem key={ index } { ...game } />
@@ -30,10 +30,9 @@ export class GamesContainer extends PureComponent {
       <div className="app wrapper">
         <div className="games wrapper">
           <Title content="All Games" />
-          <GamePlayerBox />
-          <main className="container">
+          <div className="container">
             { this.props.games.map(this.renderGame.bind(this)) }
-          </main>
+          </div>
         </div>
         <div className="newGame wrapper">
           <CreateGame />

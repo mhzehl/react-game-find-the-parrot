@@ -4,21 +4,25 @@
   margin: 30px
   display: flex
 
-.games.wrapper
-  width: 70%
+.newGame.wrapper
+  width: 30%
   margin: 10px
   display: flex
   flex-wrap: wrap
   flex-direction: column
 
+.games.wrapper
+  width: 70%
+  margin: 10px
+  display: flex
+  flex-direction: column
+
   @include breakpoint($breakpoint-large)
     display: flex
-    flex-flow: row wrap
 
   @include breakpoint($breakpoint-medium)
     display: flex
     flex-direction: column
-    flex-flow: row wrap
 
   &> header
     display: flex
@@ -30,6 +34,7 @@
       max-width: 1260px
 
   .container
+    width: 100%
     margin: 0 auto
     display: flex
     flex-wrap: wrap
@@ -38,17 +43,9 @@
     @include breakpoint($breakpoint-large)
       max-width: 1260px
       display: flex
-      padding: 0 30px
       flex-flow: row wrap
 
     @include breakpoint($breakpoint-medium)
       display: flex
       flex-direction: column
       flex-flow: row wrap
-
-  .newGame.wrapper
-    width: 30%
-    margin: 10px
-    display: flex
-    flex-wrap: wrap
-    flex-direction: column
