@@ -1,7 +1,12 @@
 @import "../styles/breakpoints"
 
+.app.wrapper
+  margin: 30px
+  display: flex
+
 .games.wrapper
-  margin: 0 auto
+  width: 70%
+  margin: 10px
   display: flex
   flex-wrap: wrap
   flex-direction: column
@@ -24,9 +29,6 @@
     @include breakpoint($breakpoint-large)
       max-width: 1260px
 
-      h1
-        padding: 0 30px
-
   .container
     margin: 0 auto
     display: flex
@@ -43,3 +45,10 @@
       display: flex
       flex-direction: column
       flex-flow: row wrap
+
+  .newGame.wrapper
+    width: 30%
+    margin: 10px
+    display: flex
+    flex-wrap: wrap
+    flex-direction: column
