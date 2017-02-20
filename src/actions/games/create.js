@@ -8,7 +8,7 @@ export default (newGame) => {
     console.log('newGame: ', newGame)
     api.app.authenticate()
     .then(() => {
-      games.create({})
+      games.create(newGame)
         .then((response) => {
           console.log('game created', response)
         }).catch((error) => {
