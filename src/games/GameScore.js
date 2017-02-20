@@ -18,7 +18,7 @@ export default class GameScore extends PureComponent {
       <div>
         <Paper style={style} zDepth={4}>
           <div className="playerScore">
-            5
+            {this.props.score}
           </div>
         </Paper>
       </div>
