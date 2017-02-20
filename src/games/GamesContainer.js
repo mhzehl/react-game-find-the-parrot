@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import fetchGames from '../actions/games/fetch'
 import subscribeToGamesService from '../actions/games/subscribe'
 import Title from '../components/Title'
+import CreateGame from './CreateGame'
 import GameItem from './GameItem'
 import './GamesContainer.sass'
 import GamePlayerBox from './GamePlayerBox'
@@ -21,20 +22,22 @@ export class GamesContainer extends PureComponent {
   // }
 
   renderGame(game, index) {
-    return <GameItem key={ index } { ...game } liked={ false } />
+    return <GameItem key={ index } { ...game } />
   }
 
   render() {
     return(
-      <div className="games wrapper">
-        <header>
+      <div className="app wrapper">
+        <div className="games wrapper">
           <Title content="All Games" />
           <GamePlayerBox />
-        </header>
-
-        <main className="container">
-          { this.props.games.map(this.renderGame.bind(this)) }
-        </main>
+          <main className="container">
+            { this.props.games.map(this.renderGame.bind(this)) }
+          </main>
+        </div>
+        <div className="newGame wrapper">
+          <CreateGame />
+        </div>
       </div>
     )
   }

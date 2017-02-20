@@ -1,13 +1,12 @@
-import { TOGGLE_LIKE } from '../actions/games/toggle-like'
 import { FETCHED_GAMES } from '../actions/games/fetch'
-import {
-  GAME_CREATED,
-  GAME_UPDATED,
-  GAME_REMOVED
-} from '../actions/games/subscribe'
+import { CREATE_GAMES } from '../actions/games/create'
+import { GAME_CREATED, GAME_UPDATED, GAME_REMOVED } from '../actions/games/subscribe'
 
 export default (state = [], { type, payload } = {}) => {
   switch(type) {
+    case CREATE_GAMES :
+      return [Object.assign({}, payload)].concat(state)
+
     case FETCHED_GAMES :
       return [].concat(payload)
 
