@@ -1,20 +1,18 @@
 import API from '../../middleware/api'
 const api = new API()
 const games = api.service('games')
-import { history } from '../../store'
 export const GAME_CREATED = 'GAME_CREATED'
 
-export default function createGame(newGame) {
+export default (newGame) => {
   return (dispatch) => {
-    console.log(newGame)
+    console.log('newGame: ', newGame)
     api.app.authenticate()
     .then(() => {
-      games.create(newGame)
+      games.create({})
         .then((response) => {
-          console.log('game created')
-          history.push('/games/:gameId')
+          console.log('game created', response)
         }).catch((error) => {
-          console.error('Error registering!', error);
+          console.error('Error', error);
         })
       }).catch((error) => {
         console.error(error)

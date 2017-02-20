@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react'
+import Title from '../components/Title'
 import createGame from '../actions/games/create'
 import { connect } from 'react-redux'
 import Editor from 'react-medium-editor'
@@ -11,10 +12,11 @@ class CreateGame extends PureComponent {
   constructor(props) {
     super()
 
-    const { title } = props
+    const { title, host } = props
 
     this.state = {
       title,
+      host
     }
   }
 
@@ -27,33 +29,42 @@ class CreateGame extends PureComponent {
 saveGame() {
   const {
     title,
+    host,
   } = this.state
 
   const game = {
     title,
+    host,
   }
 
-  console.log(game)
+  this.props.createGame(game)
 }
 
 render() {
     return (
-      <div className="editor">
-        <input
-          type="text"
-          ref="title"
-          className="title"
-          placeholder="Title"
-          defaultValue={this.state.title}
-          onChange={this.updateTitle.bind(this)}
-          onKeyDown={this.updateTitle.bind(this)} />
+      <div>
+        <Title content="New Game" />
+        <div className="editor">
+          <input
+            type="text"
+            ref="title"
+            className="title"
+            placeholder="Title"
+            defaultValue={this.state.title}
+            onChange={this.updateTitle.bind(this)}
+            onKeyDown={this.updateTitle.bind(this)} />
 
-        <div className="actions">
-          <button className="primary" onClick={this.saveGame.bind(this)}>Create</button>
+          <div className="actions">
+            <button className="primary" onClick={this.saveGame.bind(this)}>Start Now!</button>
+          </div>
         </div>
       </div>
     )
   }
 }
 
-export default connect(null, { createGame })(CreateGame)
+const mapStateToProps = ( state ) => {
+  return { host: state.currentUser }
+}
+
+export default connect(mapStateToProps, { createGame })(CreateGame)
