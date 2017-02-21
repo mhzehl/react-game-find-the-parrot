@@ -1,4 +1,6 @@
 import API from '../../middleware/api'
+import { history } from '../../store'
+
 const api = new API()
 const games = api.service('games')
 export const GAME_CREATED = 'GAME_CREATED'
