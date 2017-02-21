@@ -1,31 +1,39 @@
 // src/games/GameItem.js
 import React, { PureComponent, PropTypes } from 'react'
+import RaisedButton from 'material-ui/RaisedButton'
+import joinGameAction from '../actions/games/join-game'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import './GameItem.sass'
 
 export class GameItem extends PureComponent {
-  constructor(props) {
-    super()
 
-    const { _id, title } = props
+  joinGameAction() {
+    const { _id, players, currentUser } = this.props
+    if (!currentUser) return
 
-    this.state = {
-      _id,
-      title,
-    }
+    console.log('Click (GameItem):', _id)
+    this.props.joinGameAction({ _id, players}, currentUser)
   }
 
   render() {
-    const { _id, title } = this.props
+    const { _id, title, players, currentUser, host } = this.props
 
     return(
       <article className="game">
         <header>
-          <h1>{ title }</h1>
+          <div className="gameName">
+            <h1>{ title }</h1>
+          </div>
+          <p>Players: { players.length } / 2</p>
+          <p>Created by: { host.name }</p>
         </header>
         <main>
-          <Link to={`/games/${_id}`}>Join</Link>
+          <div className="join">
+            {(players.includes(currentUser._id)) && <Link to={`/games/${_id}`}><RaisedButton label="Play" /></Link>}
+            {(players.length <= 1 && !(players.includes(currentUser._id))) && <RaisedButton onClick={this.joinGameAction.bind(this)} label="Join now!" />}
+            {(players.length > 1) && <p>Game started!</p>}
+          </div>
         </main>
         <footer>
         </footer>
@@ -40,4 +48,4 @@ const mapStateToProps = ({ currentUser }) => {
   }
 }
 
-export default connect(mapStateToProps)(GameItem);
+export default connect(mapStateToProps, { joinGameAction })(GameItem);
