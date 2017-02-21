@@ -30,7 +30,8 @@ export class GameItem extends PureComponent {
         </header>
         <main>
           <div className="join">
-            <RaisedButton onClick={this.joinGameAction.bind(this)} label="Join now!" />
+            {(players.length <= 1 && !(players.includes(currentUser._id))) && <RaisedButton onClick={this.joinGameAction.bind(this)} label="Join now!" />}
+            {(players.length > 1) && <p>Game started!</p>}
           </div>
         </main>
         <footer>
