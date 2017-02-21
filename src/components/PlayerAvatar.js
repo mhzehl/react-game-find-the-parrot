@@ -27,7 +27,7 @@ export default class PlayerAvatar extends PureComponent {
         size={60}
         style={style}
       >
-        
+        {this.props.name}
       </Avatar>
     )
   }

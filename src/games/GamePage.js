@@ -1,6 +1,7 @@
 import React, { PureComponent, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import fetchGames from '../actions/games/fetch'
+import subscribeToGamesService from '../actions/games/subscribe'
 import Title from '../components/Title'
 import GamePlayerBox from './GamePlayerBox'
 import GameScore from './GameScore'
@@ -13,44 +14,51 @@ export class GamePage extends PureComponent {
   constructor() {
     super()
     this.state = {
-      title: 'game #',
-      scorePlayer1: 0,
-      scorePlayer2: 0,
-      playerHost: 'Melvin Dick',
-      playerGuest: 'Richard Awesome',
-      parrots: [10, 8, 16, 19, 22],
+      goalName: '',
+      boardClick: '',
     }
   }
 
   componentDidMount() {
     this.props.fetchGames()
+    this.props.subscribeToGamesService()
+  }
+
+  getGoal() {
+    console.log('GET GOAL')
+    const { parrots } = this.props
+    var i = 0
+    return parrots[i]
+  }
+
+  checkSameParrots() {
+
   }
 
   render() {
     const {
       title,
-      scorePlayer1,
-      scorePlayer2,
+      scorePlayerHost,
+      scorePlayerGuest,
       playerHost,
       playerGuest,
       parrots,
-    } = this.state
-
-    
+    } = this.props
 
     return(
       <div className="page">
         <div className="game-page">
+          <p>{title}</p>
           <div className="player-1">
-            <GamePlayerBox />
-            <GameScore score={this.state.scorePlayer1}/>
+            <GamePlayerBox name="RN"/>
+            <GameScore score={scorePlayerHost}/>
           </div>
           <div className="goal">
-            <Goal name={ this.getGoal } />
+            <Goal name="7"/>
           </div>
           <div className="player-2">
-            <GameScore score={this.state.scorePlayer2} />
-            <GamePlayerBox name={() => this.getName} />
+            <GameScore score={scorePlayerGuest} />
+            <GamePlayerBox name="MZ" />
           </div>
         </div>
         <div className="board">
@@ -74,4 +82,4 @@ const mapStateToProps = ({ games }, { params }) => {
   }
 }
 
-export default connect(mapStateToProps, { fetchGames })(GamePage)
+export default connect(mapStateToProps, { fetchGames, subscribeToGamesService })(GamePage)

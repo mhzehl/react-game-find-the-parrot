@@ -7,7 +7,7 @@ class Goal extends PureComponent {
 
     return (
       <div className="goal-container">
-        <Tile name={this.props.name}/>
+        <Tile name={this.props.name} />
       </div>
     )
   }

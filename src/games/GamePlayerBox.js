@@ -8,7 +8,7 @@ export default class GamePlayerBox extends PureComponent {
     return(
       <div className="playerbox">
         <div className="avatar">
-          <PlayerAvatar />
+          <PlayerAvatar name={this.props.name}/>
         </div>
         <div className="ready">
           <RaisedButton type="submit" label="I'm Ready!" />
