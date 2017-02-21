@@ -4,10 +4,16 @@ import './Tile.sass'
 
 class Tile extends PureComponent {
 
+  tileClick() {
+    const { name } = this.props
+    console.log('Tile clicked: ', name)
+  }
+
   render() {
-    // console.log(this.props)
     return(
-      <button className="button" onClick={() => console.log(this.props.name)}>{this.props.name}</button>
+      <button className="button"
+        onClick={ this.tileClick.bind(this) }
+      >{this.props.name}</button>
     )
   }
 }

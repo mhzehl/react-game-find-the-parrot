@@ -14,9 +14,7 @@ import {
 const style = {margin: 5};
 
 export default class PlayerAvatar extends PureComponent {
-
   render() {
-
     return(
       <Avatar
         color={deepOrange300}
@@ -24,7 +22,7 @@ export default class PlayerAvatar extends PureComponent {
         size={60}
         style={style}
       >
-        RN
+        {this.props.name}
       </Avatar>
     )
   }
