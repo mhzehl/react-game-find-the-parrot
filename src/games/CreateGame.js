@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react'
 import Title from '../components/Title'
+import RaisedButton from 'material-ui/RaisedButton'
 import createGame from '../actions/games/create'
 import { connect } from 'react-redux'
 import Editor from 'react-medium-editor'
@@ -55,7 +56,7 @@ render() {
             onKeyDown={this.updateTitle.bind(this)} />
 
           <div className="actions">
-            <button className="primary" onClick={this.saveGame.bind(this)}>Start Now!</button>
+            <RaisedButton className="primary" onClick={this.saveGame.bind(this)} label="Start Now!" />
           </div>
         </div>
       </div>

@@ -3,7 +3,6 @@ import React, { PureComponent, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import fetchGames from '../actions/games/fetch'
 import subscribeToGamesService from '../actions/games/subscribe'
-import Title from '../components/Title'
 import CreateGame from './CreateGame'
 import GameItem from './GameItem'
 import './GamesContainer.sass'
@@ -29,13 +28,12 @@ export class GamesContainer extends PureComponent {
     return(
       <div className="app wrapper">
         <div className="games wrapper">
-          <Title content="All Games" />
+          <CreateGame />
           <div className="container">
             { this.props.games.map(this.renderGame.bind(this)) }
           </div>
         </div>
         <div className="newGame wrapper">
-          <CreateGame />
         </div>
       </div>
     )

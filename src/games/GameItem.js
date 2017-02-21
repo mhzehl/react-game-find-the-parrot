@@ -22,7 +22,9 @@ export class GameItem extends PureComponent {
     return(
       <article className="game">
         <header>
-          <h1>{ title }</h1>
+          <div className="gameName">
+            <h1>{ title }</h1>
+          </div>
           <p>Players: { players.length } / 2</p>
           <p>Created by: { host.name }</p>
         </header>
