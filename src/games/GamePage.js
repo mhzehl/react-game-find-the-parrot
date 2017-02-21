@@ -24,7 +24,7 @@ export class GamePage extends PureComponent {
 
   render() {
     const { title } = this.props
-
+    console.log('goal: ', Goal)
     return(
       <div className="page">
         <div className="game-page">
