@@ -3,12 +3,12 @@ const api = new API()
 const games = api.service('games')
 
 export default (game, user) => {
-  const newPlayersArray = game.players.push(user._id)
-  console.log(user)
-  console.log('JoinGame api: ', newPlayersArray)
+  const players = game.players
+
+  console.log('JoinGame api: ', game.players )
   api.app.authenticate()
     .then(() => {
-      games.patch(game._id, { players: newPlayersArray })
+      games.update(game._id, { ...players[user._id] })
     })
     .catch((error) => {
       console.error(error)
