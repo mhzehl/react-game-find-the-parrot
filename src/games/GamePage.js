@@ -1,6 +1,7 @@
 import React, { PureComponent, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import fetchGames from '../actions/games/fetch'
+import subscribeToGamesService from '../actions/games/subscribe'
 import Title from '../components/Title'
 import GamePlayerBox from './GamePlayerBox'
 import GameScore from './GameScore'
@@ -13,30 +14,24 @@ export class GamePage extends PureComponent {
   constructor() {
     super()
     this.state = {
-      title: 'game #',
       scorePlayer1: 0,
       scorePlayer2: 0,
-      playerHost: 'Melvin Dick',
-      playerGuest: 'Richard Awesome',
-      parrots: [10, 8, 16, 19, 22],
     }
   }
 
   componentDidMount() {
     this.props.fetchGames()
+    this.props.subscribeToGamesService()
+  }
+
+  getInitials() {
+    var name = this.state.playerGuest
+    var initials = name.match(/\b\w/g) || [];
+    initials = ((initials.shift() || '') + (initials.pop() || '')).toUpperCase()
+    return initials
   }
 
   render() {
-    const {
-      title,
-      scorePlayer1,
-      scorePlayer2,
-      playerHost,
-      playerGuest,
-      parrots,
-    } = this.state
-
-    
 
     return(
       <div className="page">
@@ -50,7 +45,7 @@ export class GamePage extends PureComponent {
           </div>
           <div className="player-2">
             <GameScore score={this.state.scorePlayer2} />
-            <GamePlayerBox name={() => this.getName} />
+            <GamePlayerBox name={this.getInitials} />
           </div>
         </div>
         <div className="board">
@@ -74,4 +69,4 @@ const mapStateToProps = ({ games }, { params }) => {
   }
 }
 
-export default connect(mapStateToProps, { fetchGames })(GamePage)
+export default connect(mapStateToProps, { fetchGames, subscribeToGamesService })(GamePage)

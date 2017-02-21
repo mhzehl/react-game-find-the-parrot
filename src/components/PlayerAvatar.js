@@ -14,11 +14,6 @@ import {
 const style = {margin: 5};
 
 export default class PlayerAvatar extends PureComponent {
-
-  getInitials() {
-    this.props.getName()
-  }
-
   render() {
     return(
       <Avatar
@@ -27,7 +22,7 @@ export default class PlayerAvatar extends PureComponent {
         size={60}
         style={style}
       >
-        
+        {this.props.name}
       </Avatar>
     )
   }
